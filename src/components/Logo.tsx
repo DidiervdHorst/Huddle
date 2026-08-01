@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Icon from "./Icon";
 
 interface LogoProps {
   size?: "sm" | "md" | "lg";
@@ -7,22 +6,25 @@ interface LogoProps {
 }
 
 const sizeMap = {
-  sm: { text: 20, icon: 14 },
-  md: { text: 26, icon: 17 },
-  lg: { text: 42, icon: 26 },
+  sm: 22,
+  md: 30,
+  lg: 52,
 };
 
 export default function Logo({ size = "md", className = "" }: LogoProps) {
-  const s = sizeMap[size];
+  const fontSize = sizeMap[size];
   return (
-    <motion.div whileTap={{ scale: 0.95 }} className={`inline-flex items-center gap-1 ${className}`}>
+    <motion.div whileTap={{ scale: 0.95 }} className={`relative inline-flex ${className}`}>
       <span
-        className="font-display text-ink leading-none select-none"
-        style={{ fontSize: s.text }}
+        aria-hidden
+        className="absolute font-display text-coral-dark leading-none select-none"
+        style={{ fontSize, left: 2, top: 2.5 }}
       >
         huddle
       </span>
-      <Icon name="starburst" size={s.icon} className="text-rust -translate-y-1" />
+      <span className="relative font-display text-gold leading-none select-none" style={{ fontSize }}>
+        huddle
+      </span>
     </motion.div>
   );
 }

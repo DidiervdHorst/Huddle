@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useMemo } from "react";
 import Icon from "./Icon";
 
-const COLORS = ["#C2542E", "#3E7C93", "#D9A441", "#6E7B52", "#E0897E", "#4C8C6E"];
+const COLORS = ["#DFA82F", "#2F7A6B", "#2C4F8C", "#D96F4C", "#5FAE9C", "#F0C868"];
 
 interface ConfettiProps {
   count?: number;

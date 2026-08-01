@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import '@fontsource/bevan/400.css'
+import '@fontsource/luckiest-guy/400.css'
 import '@fontsource/karla/400.css'
 import '@fontsource/karla/500.css'
 import '@fontsource/karla/600.css'

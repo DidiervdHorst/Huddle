@@ -19,15 +19,14 @@ body {
 
 body {
   font-family: "Karla", system-ui, sans-serif;
-  color: #221d16;
-  background: #f4ecdc;
+  color: #25201a;
+  background: #f1e6d2;
 }
 
 #root {
   min-height: 100svh;
 }
 
-/* Hide scrollbars but keep scroll functionality */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -36,48 +35,40 @@ body {
   scrollbar-width: none;
 }
 
-/* Warm sun-bleached paper background with subtle grain */
+/* Warm cream poster background */
 .huddle-paper-bg {
-  background-color: #f4ecdc;
-  background-image:
-    radial-gradient(ellipse 120% 70% at 15% -10%, rgba(217, 164, 65, 0.22), transparent 55%),
-    radial-gradient(ellipse 100% 60% at 100% 0%, rgba(62, 124, 147, 0.16), transparent 55%),
-    radial-gradient(ellipse 90% 60% at 10% 100%, rgba(194, 84, 46, 0.14), transparent 55%);
+  background-color: #f1e6d2;
 }
 
 .huddle-grain {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
   mix-blend-mode: multiply;
-  opacity: 0.06;
+  opacity: 0.035;
 }
 
-/* Ink-outlined sticker/patch surface */
-.sticker {
-  border: 2px solid #221d16;
-  box-shadow: 5px 5px 0 rgba(34, 29, 22, 0.92);
+/* Flat "pop" surface: solid color, thin ink rule, chunky flat bottom shadow */
+.pop {
+  border: 2px solid rgba(37, 29, 20, 0.9);
+  box-shadow: 0 4px 0 rgba(37, 29, 20, 0.85);
 }
 
-.sticker-sm {
-  border: 1.5px solid #221d16;
-  box-shadow: 3px 3px 0 rgba(34, 29, 22, 0.9);
+.pop-sm {
+  border: 1.5px solid rgba(37, 29, 20, 0.85);
+  box-shadow: 0 3px 0 rgba(37, 29, 20, 0.85);
 }
 
-/* Flat warm surface for content cards */
 .paper-card {
-  background: #fbf6ea;
-  border: 1.5px solid rgba(34, 29, 22, 0.14);
+  background: #f8f0e0;
+  border: 1.5px solid rgba(37, 29, 20, 0.14);
 }
 
 .paper-panel {
-  background: #f9f2e2;
-  border-top: 2px solid #221d16;
+  background: #f6ecd8;
+  border-top: 2px solid rgba(37, 29, 20, 0.9);
 }
 
-.text-hero {
-  background: linear-gradient(100deg, #1f4756 0%, #3e7c93 55%, #c2542e 110%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.logo-shadow {
+  text-shadow: 3px 3px 0 rgba(178, 79, 48, 0.9);
 }
 
 .safe-top {

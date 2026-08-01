@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export default function PhoneFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-[#DCCFA9] p-0 sm:p-8">
+    <div className="min-h-screen w-full flex items-center justify-center bg-[#D8C9A3] p-0 sm:p-8">
       <div className="relative w-full h-[100svh] sm:h-[860px] sm:max-h-[92vh] sm:w-[400px] sm:rounded-[48px] rounded-none overflow-hidden sm:border-[10px] border-0 border-ink sm:shadow-[0_30px_80px_rgba(34,29,22,0.35)]">
         {/* Notch */}
         <div className="hidden sm:flex absolute top-0 left-1/2 -translate-x-1/2 w-[150px] h-[28px] bg-ink rounded-b-2xl z-50 items-center justify-center">

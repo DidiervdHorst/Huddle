@@ -24,12 +24,12 @@ export default function BottomNav({ active, onNavigate, onCreate }: BottomNavPro
 
           <div className="relative w-16 flex justify-center">
             <motion.button
-              whileTap={{ scale: 0.9, y: 2, boxShadow: "1.5px 1.5px 0 rgba(34,29,22,0.92)" }}
+              whileTap={{ scale: 0.9, y: 3, boxShadow: "0 1px 0 rgba(37,29,20,0.85)" }}
               onClick={onCreate}
               aria-label="Create huddle"
-              className="sticker absolute -top-9 w-16 h-16 rounded-full flex items-center justify-center bg-rust text-paper"
+              className="pop absolute -top-9 w-16 h-16 rounded-full flex items-center justify-center bg-coral text-paper"
             >
-              <Icon name="plus" size={26} strokeWidth={2.2} />
+              <Icon name="plus" size={26} strokeWidth={2.4} />
             </motion.button>
           </div>
 

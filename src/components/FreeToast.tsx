@@ -29,17 +29,17 @@ export default function FreeToast({ open, onClose }: FreeToastProps) {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.85, opacity: 0 }}
             transition={{ type: "spring", stiffness: 320, damping: 20 }}
-            className="relative paper-panel sticker rounded-xl3 px-8 py-8 flex flex-col items-center mx-8"
+            className="relative paper-panel pop rounded-xl3 px-8 py-8 flex flex-col items-center mx-8"
           >
             <Confetti count={20} />
             <motion.div
               animate={{ scale: [1, 1.08, 1] }}
               transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-              className="sticker w-16 h-16 rounded-full bg-reef text-paper flex items-center justify-center"
+              className="pop w-16 h-16 rounded-full bg-teal text-paper flex items-center justify-center"
             >
-              <Icon name="sun" size={30} strokeWidth={1.7} />
+              <Icon name="sun" size={30} strokeWidth={2} />
             </motion.div>
-            <h2 className="font-display text-xl text-ink mt-4">You're free!</h2>
+            <h2 className="font-display text-xl text-navy-dark mt-4">You're free!</h2>
             <p className="text-ink-soft font-semibold text-sm mt-1 text-center max-w-[200px]">
               Your friends can now see you're up for something
             </p>

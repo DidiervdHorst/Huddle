@@ -30,7 +30,7 @@ interface IconProps {
   className?: string;
 }
 
-export default function Icon({ name, size = 22, strokeWidth = 1.8, className = "" }: IconProps) {
+export default function Icon({ name, size = 22, strokeWidth = 2.2, className = "" }: IconProps) {
   const common = {
     width: size,
     height: size,

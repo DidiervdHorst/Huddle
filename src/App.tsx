@@ -9,18 +9,17 @@ import Logo from "./components/Logo";
 import HomeScreen from "./screens/HomeScreen";
 import ActivityScreen from "./screens/ActivityScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import type { Availability, MoodOption } from "./data/mockData";
+import { groups as initialGroups, type Group, type MoodOption } from "./data/mockData";
 
 function App() {
   const [screen, setScreen] = useState<Screen>("home");
   const [sheetOpen, setSheetOpen] = useState(false);
   const [prefillMood, setPrefillMood] = useState<MoodOption | null>(null);
-  const [availability, setAvailability] = useState<Availability>("free");
   const [freeToastOpen, setFreeToastOpen] = useState(false);
+  const [groups, setGroups] = useState<Group[]>(initialGroups);
 
   const handleMoodTap = (mood: MoodOption) => {
     if (mood.id === "free") {
-      setAvailability("free");
       setFreeToastOpen(true);
       return;
     }
@@ -31,6 +30,10 @@ function App() {
   const handleCreateTap = () => {
     setPrefillMood(null);
     setSheetOpen(true);
+  };
+
+  const handleCreateGroup = (name: string, memberIds: string[]) => {
+    setGroups((prev) => [...prev, { id: `g${prev.length + 1}-${Date.now()}`, name, memberIds }]);
   };
 
   return (
@@ -54,20 +57,21 @@ function App() {
             transition={{ duration: 0.2 }}
             className="absolute inset-0"
           >
-            {screen === "home" && (
-              <HomeScreen onMoodTap={handleMoodTap} availability={availability} />
-            )}
+            {screen === "home" && <HomeScreen onMoodTap={handleMoodTap} />}
             {screen === "activity" && <ActivityScreen />}
-            {screen === "profile" && (
-              <ProfileScreen availability={availability} onChangeAvailability={setAvailability} />
-            )}
+            {screen === "profile" && <ProfileScreen groups={groups} onCreateGroup={handleCreateGroup} />}
           </motion.div>
         </AnimatePresence>
       </div>
 
       <BottomNav active={screen} onNavigate={setScreen} onCreate={handleCreateTap} />
 
-      <CreateHuddleSheet open={sheetOpen} onClose={() => setSheetOpen(false)} prefill={prefillMood} />
+      <CreateHuddleSheet
+        open={sheetOpen}
+        onClose={() => setSheetOpen(false)}
+        prefill={prefillMood}
+        groups={groups}
+      />
       <FreeToast open={freeToastOpen} onClose={() => setFreeToastOpen(false)} />
     </PhoneFrame>
   );
