@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+  margin: 0;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  color: #2b2440;
+  background: #f4eefb;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+/* Hide scrollbars but keep scroll functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Huddle animated mesh gradient background */
+.huddle-gradient-bg {
+  background: linear-gradient(
+    115deg,
+    #cff7e3 0%,
+    #d6ecfc 22%,
+    #e6dcfb 45%,
+    #ffd3cc 68%,
+    #ffe8d1 88%,
+    #cff7e3 100%
+  );
+  background-size: 300% 300%;
+  animation: gradientShift 22s ease infinite;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+.glass-dark {
+  background: rgba(43, 36, 64, 0.35);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #ff8c7a, #c7b3f5 60%, #7ec2e8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logo-gradient {
+  background: linear-gradient(135deg, #5fd3a6 0%, #a88aee 45%, #ff7a5c 90%);
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
