@@ -4,79 +4,85 @@ export default {
   theme: {
     extend: {
       colors: {
-        mint: {
-          light: "#CFF7E3",
-          DEFAULT: "#8FE8C4",
-          dark: "#5FD3A6",
+        paper: {
+          DEFAULT: "#F4ECDC",
+          dark: "#EBDFC7",
+          darker: "#DFCFA9",
         },
-        lavender: {
-          light: "#E6DCFB",
-          DEFAULT: "#C7B3F5",
-          dark: "#A88AEE",
+        ink: {
+          DEFAULT: "#221D16",
+          soft: "#6B5F4E",
+          faint: "#948667",
+        },
+        ocean: {
+          light: "#6FA6BC",
+          DEFAULT: "#3E7C93",
+          dark: "#1F4756",
+        },
+        rust: {
+          light: "#DE8560",
+          DEFAULT: "#C2542E",
+          dark: "#8F3D20",
         },
         coral: {
-          light: "#FFD3CC",
-          DEFAULT: "#FF9B85",
-          dark: "#FF7A5C",
+          light: "#F0AFA4",
+          DEFAULT: "#E0897E",
+          dark: "#C96455",
         },
-        peach: {
-          light: "#FFE8D1",
-          DEFAULT: "#FFC79B",
-          dark: "#FFAE6E",
+        gold: {
+          light: "#EAC576",
+          DEFAULT: "#D9A441",
+          dark: "#B3822E",
         },
-        sky: {
-          light: "#D6ECFC",
-          DEFAULT: "#A8D8F0",
-          dark: "#7EC2E8",
+        olive: {
+          light: "#96A374",
+          DEFAULT: "#6E7B52",
+          dark: "#535D3D",
         },
-        ink: "#2B2440",
-        muted: "#786F94",
+        reef: {
+          light: "#84BBA0",
+          DEFAULT: "#4C8C6E",
+          dark: "#396B54",
+        },
       },
       fontFamily: {
-        display: ["'Baloo 2'", "system-ui", "sans-serif"],
-        sans: ["'Plus Jakarta Sans'", "system-ui", "sans-serif"],
+        display: ["Bevan", "Georgia", "serif"],
+        sans: ["Karla", "system-ui", "sans-serif"],
       },
       borderRadius: {
-        xl2: "28px",
-        xl3: "36px",
+        xl2: "20px",
+        xl3: "28px",
       },
       boxShadow: {
-        glass: "0 8px 32px rgba(90, 60, 140, 0.12)",
-        floaty: "0 16px 40px rgba(255, 122, 92, 0.25)",
-        card: "0 10px 30px rgba(90, 60, 140, 0.10)",
-      },
-      backdropBlur: {
-        xs: "2px",
+        sticker: "5px 5px 0 rgba(34, 29, 22, 0.92)",
+        stickerSm: "3px 3px 0 rgba(34, 29, 22, 0.9)",
+        stickerPress: "1.5px 1.5px 0 rgba(34, 29, 22, 0.92)",
+        card: "0 2px 0 rgba(34, 29, 22, 0.06), 0 10px 24px rgba(34, 29, 22, 0.08)",
+        floaty: "0 10px 28px rgba(34, 29, 22, 0.28)",
       },
       keyframes: {
-        gradientShift: {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-        },
         floatSlow: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
-        blobMove: {
-          "0%, 100%": { transform: "translate(0px, 0px) scale(1)" },
-          "33%": { transform: "translate(20px, -15px) scale(1.08)" },
-          "66%": { transform: "translate(-15px, 10px) scale(0.95)" },
+          "0%, 100%": { transform: "translateY(0px) rotate(-2deg)" },
+          "50%": { transform: "translateY(-8px) rotate(2deg)" },
         },
         pulseSoft: {
           "0%, 100%": { opacity: 1 },
-          "50%": { opacity: 0.6 },
+          "50%": { opacity: 0.55 },
         },
         popIn: {
           "0%": { transform: "scale(0.85)", opacity: 0 },
           "100%": { transform: "scale(1)", opacity: 1 },
         },
+        drift: {
+          "0%, 100%": { transform: "translateX(0px)" },
+          "50%": { transform: "translateX(14px)" },
+        },
       },
       animation: {
-        gradientShift: "gradientShift 18s ease infinite",
-        floatSlow: "floatSlow 6s ease-in-out infinite",
-        blobMove: "blobMove 14s ease-in-out infinite",
-        pulseSoft: "pulseSoft 2.4s ease-in-out infinite",
+        floatSlow: "floatSlow 5s ease-in-out infinite",
+        pulseSoft: "pulseSoft 2.2s ease-in-out infinite",
         popIn: "popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)",
+        drift: "drift 9s ease-in-out infinite",
       },
     },
   },

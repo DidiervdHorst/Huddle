@@ -38,7 +38,7 @@ function App() {
       <GradientBackground />
 
       {/* Top bar with logo */}
-      <div className="absolute top-0 left-0 right-0 z-30 flex justify-center pt-4 pointer-events-none safe-top">
+      <div className="absolute top-0 left-0 right-0 z-30 flex justify-center pt-6 pointer-events-none safe-top">
         <div className="pointer-events-auto">
           <Logo size="sm" />
         </div>

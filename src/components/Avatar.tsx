@@ -1,20 +1,26 @@
 interface AvatarProps {
-  emoji: string;
-  gradient: string;
+  name: string;
+  color: string;
   size?: number;
   ring?: boolean;
   className?: string;
 }
 
-export default function Avatar({ emoji, gradient, size = 48, ring = false, className = "" }: AvatarProps) {
+export default function Avatar({ name, color, size = 48, ring = false, className = "" }: AvatarProps) {
+  const initial = name.trim().charAt(0).toUpperCase();
   return (
     <div
-      className={`bg-gradient-to-br ${gradient} rounded-full flex items-center justify-center shrink-0 shadow-sm ${
-        ring ? "ring-4 ring-white" : ""
+      className={`${color} rounded-full flex items-center justify-center shrink-0 border-2 border-ink ${
+        ring ? "ring-4 ring-paper" : ""
       } ${className}`}
-      style={{ width: size, height: size, fontSize: size * 0.48 }}
+      style={{ width: size, height: size }}
     >
-      <span className="drop-shadow-sm select-none">{emoji}</span>
+      <span
+        className="font-display text-paper leading-none select-none"
+        style={{ fontSize: size * 0.42, transform: "translateY(1px)" }}
+      >
+        {initial}
+      </span>
     </div>
   );
 }

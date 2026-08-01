@@ -1,9 +1,10 @@
+import type { IconName } from "../components/Icon";
+
 export type Availability = "free" | "maybe" | "busy";
 
 export interface Friend {
   id: string;
   name: string;
-  emoji: string;
   color: string;
   availability: Availability;
 }
@@ -11,99 +12,97 @@ export interface Friend {
 export interface HuddleCard {
   id: string;
   name: string;
-  avatarEmoji: string;
   avatarColor: string;
-  activityEmoji: string;
+  activityIcon: IconName;
   activityLabel: string;
   status: string;
   joinedCount: number;
-  joinedAvatars: string[];
+  joinedNames: string[];
   kind: "join" | "message";
   cta: "JOIN" | "MESSAGE";
 }
 
 export const currentUser = {
   name: "Mayra",
-  avatarEmoji: "🦋",
-  avatarColor: "from-lavender to-coral",
+  avatarColor: "bg-ocean-dark",
   availability: "free" as Availability,
   interests: ["Coffee walks", "Live music", "Board games", "Beach days", "Brunch"],
-  favoriteActivities: ["☕ Coffee", "🍕 Dinner", "🎲 Games", "🚶 Walk"],
+  favoriteActivities: [
+    { icon: "coffee" as IconName, label: "Coffee" },
+    { icon: "pizza" as IconName, label: "Dinner" },
+    { icon: "dice" as IconName, label: "Games" },
+    { icon: "footprints" as IconName, label: "Walk" },
+  ],
 };
 
 export const friends: Friend[] = [
-  { id: "f1", name: "Lisa", emoji: "🌸", color: "from-mint to-sky", availability: "free" },
-  { id: "f2", name: "Mark", emoji: "🎸", color: "from-peach to-coral", availability: "free" },
-  { id: "f3", name: "Sophie", emoji: "✨", color: "from-lavender to-sky", availability: "free" },
-  { id: "f4", name: "Theo", emoji: "🛹", color: "from-coral to-peach", availability: "maybe" },
-  { id: "f5", name: "Amara", emoji: "🌊", color: "from-sky to-mint", availability: "busy" },
-  { id: "f6", name: "Jonas", emoji: "🔥", color: "from-coral to-lavender", availability: "free" },
-  { id: "f7", name: "Nina", emoji: "🍀", color: "from-mint to-lavender", availability: "maybe" },
+  { id: "f1", name: "Lisa", color: "bg-rust", availability: "free" },
+  { id: "f2", name: "Mark", color: "bg-ocean", availability: "free" },
+  { id: "f3", name: "Sophie", color: "bg-gold-dark", availability: "free" },
+  { id: "f4", name: "Theo", color: "bg-olive", availability: "maybe" },
+  { id: "f5", name: "Amara", color: "bg-coral-dark", availability: "busy" },
+  { id: "f6", name: "Jonas", color: "bg-ocean-dark", availability: "free" },
+  { id: "f7", name: "Nina", color: "bg-rust-dark", availability: "maybe" },
 ];
 
 export const huddleFeed: HuddleCard[] = [
   {
     id: "h1",
     name: "Lisa",
-    avatarEmoji: "🌸",
-    avatarColor: "from-mint to-sky",
-    activityEmoji: "☕",
+    avatarColor: "bg-rust",
+    activityIcon: "coffee",
     activityLabel: "Coffee nearby",
     status: "Available now",
     joinedCount: 2,
-    joinedAvatars: ["🎸", "✨"],
+    joinedNames: ["Mark", "Sophie"],
     kind: "join",
     cta: "JOIN",
   },
   {
     id: "h2",
     name: "Mark",
-    avatarEmoji: "🎸",
-    avatarColor: "from-peach to-coral",
-    activityEmoji: "🍻",
+    avatarColor: "bg-ocean",
+    activityIcon: "drink",
     activityLabel: "Drinks tonight",
     status: "Starts 20:00",
     joinedCount: 3,
-    joinedAvatars: ["🌸", "🛹", "🔥"],
+    joinedNames: ["Lisa", "Theo", "Jonas"],
     kind: "join",
     cta: "JOIN",
   },
   {
     id: "h3",
     name: "Sophie",
-    avatarEmoji: "✨",
-    avatarColor: "from-lavender to-sky",
-    activityEmoji: "🟢",
+    avatarColor: "bg-gold-dark",
+    activityIcon: "sun",
     activityLabel: "Just hanging",
     status: "Open for ideas",
     joinedCount: 0,
-    joinedAvatars: [],
+    joinedNames: [],
     kind: "message",
     cta: "MESSAGE",
   },
   {
     id: "h4",
     name: "Jonas",
-    avatarEmoji: "🔥",
-    avatarColor: "from-coral to-lavender",
-    activityEmoji: "🏃",
+    avatarColor: "bg-ocean-dark",
+    activityIcon: "footprints",
     activityLabel: "Evening run",
     status: "Starts 18:30",
     joinedCount: 1,
-    joinedAvatars: ["🍀"],
+    joinedNames: ["Nina"],
     kind: "join",
     cta: "JOIN",
   },
   {
     id: "h5",
     name: "Nina",
-    avatarEmoji: "🍀",
-    avatarColor: "from-mint to-lavender",
-    activityEmoji: "🎬",
+    avatarColor: "bg-rust-dark",
+    activityIcon: "movie",
     activityLabel: "Movie night",
     status: "Starts 21:00",
     joinedCount: 4,
-    joinedAvatars: ["🌸", "🎸", "✨", "🛹"],
+    joinedNames: ["Lisa", "Mark", "Sophie", "Theo"],
     kind: "join",
     cta: "JOIN",
   },
@@ -112,27 +111,26 @@ export const huddleFeed: HuddleCard[] = [
 export interface MoodOption {
   id: string;
   label: string;
-  emoji: string;
-  gradient: string;
+  icon: IconName;
+  color: string;
 }
 
 export const moodOptions: MoodOption[] = [
-  { id: "free", label: "I'm free", emoji: "🟢", gradient: "from-mint to-sky" },
-  { id: "drinks", label: "Drinks", emoji: "🍻", gradient: "from-coral to-peach" },
-  { id: "coffee", label: "Coffee", emoji: "☕", gradient: "from-peach to-lavender" },
-  { id: "dinner", label: "Dinner", emoji: "🍕", gradient: "from-coral to-lavender" },
-  { id: "walk", label: "Walk", emoji: "🚶", gradient: "from-mint to-lavender" },
-  { id: "sport", label: "Sport", emoji: "🏃", gradient: "from-sky to-mint" },
-  { id: "games", label: "Games", emoji: "🎲", gradient: "from-lavender to-sky" },
-  { id: "movie", label: "Movie", emoji: "🎬", gradient: "from-lavender to-coral" },
-  { id: "other", label: "Something else", emoji: "➕", gradient: "from-sky to-peach" },
+  { id: "free", label: "I'm free", icon: "sun", color: "bg-reef" },
+  { id: "drinks", label: "Drinks", icon: "drink", color: "bg-rust" },
+  { id: "coffee", label: "Coffee", icon: "coffee", color: "bg-gold-dark" },
+  { id: "dinner", label: "Dinner", icon: "pizza", color: "bg-coral-dark" },
+  { id: "walk", label: "Walk", icon: "footprints", color: "bg-olive" },
+  { id: "sport", label: "Sport", icon: "surfboard", color: "bg-ocean-dark" },
+  { id: "games", label: "Games", icon: "dice", color: "bg-gold" },
+  { id: "movie", label: "Movie", icon: "movie", color: "bg-ocean" },
+  { id: "other", label: "Something else", icon: "starburst", color: "bg-rust-dark" },
 ];
 
 export interface ActivityNotification {
   id: string;
   type: "joined" | "message" | "started";
   name: string;
-  emoji: string;
   color: string;
   text: string;
   time: string;
@@ -143,8 +141,7 @@ export const activityNotifications: ActivityNotification[] = [
     id: "a1",
     type: "joined",
     name: "Lisa",
-    emoji: "🌸",
-    color: "from-mint to-sky",
+    color: "bg-rust",
     text: "joined your Coffee huddle",
     time: "2m ago",
   },
@@ -152,17 +149,15 @@ export const activityNotifications: ActivityNotification[] = [
     id: "a2",
     type: "message",
     name: "Sophie",
-    emoji: "✨",
-    color: "from-lavender to-sky",
-    text: "sent you a message: \"down for anything tbh\"",
+    color: "bg-gold-dark",
+    text: 'sent you a message: "down for anything tbh"',
     time: "12m ago",
   },
   {
     id: "a3",
     type: "started",
     name: "Mark",
-    emoji: "🎸",
-    color: "from-peach to-coral",
+    color: "bg-ocean",
     text: "started Drinks tonight",
     time: "25m ago",
   },
@@ -170,8 +165,7 @@ export const activityNotifications: ActivityNotification[] = [
     id: "a4",
     type: "joined",
     name: "Theo",
-    emoji: "🛹",
-    color: "from-coral to-peach",
+    color: "bg-olive",
     text: "and 2 others joined Movie night",
     time: "1h ago",
   },
@@ -179,8 +173,7 @@ export const activityNotifications: ActivityNotification[] = [
     id: "a5",
     type: "joined",
     name: "Nina",
-    emoji: "🍀",
-    color: "from-mint to-lavender",
+    color: "bg-rust-dark",
     text: "joined your Evening run",
     time: "3h ago",
   },

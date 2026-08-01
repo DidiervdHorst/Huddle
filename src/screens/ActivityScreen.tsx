@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import Avatar from "../components/Avatar";
+import Icon, { type IconName } from "../components/Icon";
 import { activityNotifications, friends } from "../data/mockData";
 
-const typeMeta: Record<string, { icon: string; ring: string }> = {
-  joined: { icon: "🙌", ring: "ring-mint" },
-  message: { icon: "💬", ring: "ring-sky" },
-  started: { icon: "⚡", ring: "ring-coral" },
+const typeMeta: Record<string, { icon: IconName; badge: string }> = {
+  joined: { icon: "check", badge: "bg-reef" },
+  message: { icon: "chat", badge: "bg-ocean" },
+  started: { icon: "lightning", badge: "bg-gold" },
 };
 
 export default function ActivityScreen() {
@@ -17,16 +18,16 @@ export default function ActivityScreen() {
         <motion.h1
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="font-display font-bold text-[26px] text-ink"
+          className="font-display text-[24px] text-ink"
         >
-          Activity 💬
+          Activity
         </motion.h1>
-        <p className="text-muted font-medium mt-1">What your friends are up to</p>
+        <p className="text-ink-soft font-semibold mt-1">What your friends are up to</p>
       </div>
 
       {/* Free right now strip */}
       <div className="mt-3 px-5">
-        <p className="text-xs font-bold text-muted uppercase tracking-wide mb-2.5">Free right now</p>
+        <p className="text-xs font-extrabold text-ink-faint uppercase tracking-wider mb-2.5">Free right now</p>
         <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
           {freeNow.map((f, i) => (
             <motion.div
@@ -37,8 +38,8 @@ export default function ActivityScreen() {
               className="flex flex-col items-center gap-1.5 shrink-0"
             >
               <div className="relative">
-                <Avatar emoji={f.emoji} gradient={f.color} size={56} />
-                <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-mint-dark ring-2 ring-white animate-pulseSoft" />
+                <Avatar name={f.name} color={f.color} size={56} />
+                <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-reef border-2 border-paper animate-pulseSoft" />
               </div>
               <span className="text-[11px] font-bold text-ink/80">{f.name}</span>
             </motion.div>
@@ -48,7 +49,7 @@ export default function ActivityScreen() {
 
       {/* Notifications feed */}
       <div className="px-5 mt-6">
-        <p className="text-xs font-bold text-muted uppercase tracking-wide mb-2.5">Recent</p>
+        <p className="text-xs font-extrabold text-ink-faint uppercase tracking-wider mb-2.5">Recent</p>
         <div className="flex flex-col gap-3">
           {activityNotifications.map((n, i) => (
             <motion.div
@@ -56,19 +57,21 @@ export default function ActivityScreen() {
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.05, type: "spring", stiffness: 260, damping: 24 }}
-              className="glass rounded-xl2 p-3.5 flex items-center gap-3 shadow-card"
+              className="paper-card rounded-xl2 p-3.5 flex items-center gap-3 shadow-card"
             >
-              <div className={`relative ring-2 ${typeMeta[n.type].ring} rounded-full`}>
-                <Avatar emoji={n.emoji} gradient={n.color} size={44} />
-                <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-white flex items-center justify-center text-[10px] shadow-sm">
-                  {typeMeta[n.type].icon}
+              <div className="relative">
+                <Avatar name={n.name} color={n.color} size={44} />
+                <span
+                  className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full ${typeMeta[n.type].badge} border-2 border-paper flex items-center justify-center text-paper`}
+                >
+                  <Icon name={typeMeta[n.type].icon} size={11} strokeWidth={2.4} />
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-ink font-medium leading-snug">
-                  <span className="font-bold">{n.name}</span> {n.text}
+                <p className="text-sm text-ink font-semibold leading-snug">
+                  <span className="font-extrabold">{n.name}</span> {n.text}
                 </p>
-                <p className="text-[11px] text-muted font-semibold mt-0.5">{n.time}</p>
+                <p className="text-[11px] text-ink-faint font-bold mt-0.5">{n.time}</p>
               </div>
             </motion.div>
           ))}

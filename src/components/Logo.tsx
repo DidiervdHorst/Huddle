@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Icon from "./Icon";
 
 interface LogoProps {
   size?: "sm" | "md" | "lg";
@@ -6,34 +7,22 @@ interface LogoProps {
 }
 
 const sizeMap = {
-  sm: { box: 32, text: "text-base", radius: "rounded-xl" },
-  md: { box: 44, text: "text-xl", radius: "rounded-2xl" },
-  lg: { box: 88, text: "text-4xl", radius: "rounded-[28px]" },
+  sm: { text: 20, icon: 14 },
+  md: { text: 26, icon: 17 },
+  lg: { text: 42, icon: 26 },
 };
 
 export default function Logo({ size = "md", className = "" }: LogoProps) {
   const s = sizeMap[size];
   return (
-    <motion.div
-      whileTap={{ scale: 0.94 }}
-      className={`inline-flex items-center gap-2.5 ${className}`}
-    >
-      <div
-        className={`logo-gradient ${s.radius} shadow-floaty flex items-center justify-center animate-blobMove`}
-        style={{ width: s.box, height: s.box, backgroundSize: "200% 200%" }}
+    <motion.div whileTap={{ scale: 0.95 }} className={`inline-flex items-center gap-1 ${className}`}>
+      <span
+        className="font-display text-ink leading-none select-none"
+        style={{ fontSize: s.text }}
       >
-        <span
-          className="font-display font-bold text-white select-none"
-          style={{ fontSize: s.box * 0.52 }}
-        >
-          h
-        </span>
-      </div>
-      {size !== "sm" && (
-        <span className={`font-display font-bold ${s.text} text-ink tracking-tight`}>
-          huddle
-        </span>
-      )}
+        huddle
+      </span>
+      <Icon name="starburst" size={s.icon} className="text-rust -translate-y-1" />
     </motion.div>
   );
 }

@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Avatar from "./Avatar";
 import Confetti from "./Confetti";
+import Icon from "./Icon";
 import { friends, moodOptions, type MoodOption } from "../data/mockData";
 
 interface CreateHuddleSheetProps {
@@ -55,41 +56,40 @@ export default function CreateHuddleSheet({ open, onClose, prefill }: CreateHudd
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-ink/30 backdrop-blur-sm z-[60]"
+            className="absolute inset-0 bg-ink/40 backdrop-blur-[2px] z-[60]"
           />
           <motion.div
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", stiffness: 340, damping: 34 }}
-            className="absolute bottom-0 left-0 right-0 z-[70] max-h-[88%] flex flex-col rounded-t-xl3 overflow-hidden glass-strong shadow-glass"
+            className="absolute bottom-0 left-0 right-0 z-[70] max-h-[88%] flex flex-col rounded-t-xl3 overflow-hidden paper-panel shadow-floaty"
           >
-            <div className="huddle-gradient-bg absolute inset-0 opacity-40 -z-10" />
             <div className="flex justify-center pt-3 pb-1">
-              <div className="w-10 h-1.5 rounded-full bg-ink/15" />
+              <div className="w-10 h-1.5 rounded-full bg-ink/20" />
             </div>
 
             {!success ? (
               <div className="px-5 pb-6 pt-2 overflow-y-auto no-scrollbar">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-display font-bold text-xl text-ink">Start a Huddle</h2>
+                  <h2 className="font-display text-xl text-ink">Start a Huddle</h2>
                   <motion.button
                     whileTap={{ scale: 0.9 }}
                     onClick={onClose}
-                    className="w-8 h-8 rounded-full bg-white/70 flex items-center justify-center text-ink/60 text-sm font-bold"
+                    className="w-8 h-8 rounded-full bg-paper-dark border border-ink/15 flex items-center justify-center text-ink/60"
                   >
-                    ✕
+                    <Icon name="close" size={14} strokeWidth={2.2} />
                   </motion.button>
                 </div>
 
-                <label className="block text-xs font-bold text-muted uppercase tracking-wide mb-2">
+                <label className="block text-xs font-extrabold text-ink-faint uppercase tracking-wider mb-2">
                   What do you want to do?
                 </label>
                 <input
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="Coffee, drinks, anything…"
-                  className="w-full rounded-2xl px-4 py-3.5 bg-white/80 border border-white/70 text-ink font-semibold placeholder:text-muted/70 placeholder:font-medium focus:outline-none focus:ring-2 focus:ring-lavender-dark/50 mb-4"
+                  className="w-full rounded-xl2 px-4 py-3.5 bg-paper border-2 border-ink/80 text-ink font-bold placeholder:text-ink-faint placeholder:font-semibold focus:outline-none mb-4"
                 />
 
                 <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 mb-5 -mx-1 px-1">
@@ -103,27 +103,20 @@ export default function CreateHuddleSheet({ open, onClose, prefill }: CreateHudd
                           setActivity(m);
                           setText(m.label);
                         }}
-                        className={`shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
-                          activity?.id === m.id
-                            ? "text-white shadow-sm"
-                            : "bg-white/70 text-ink/70"
+                        className={`shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-extrabold whitespace-nowrap border-2 border-ink transition-colors ${
+                          activity?.id === m.id ? `${m.color} text-paper` : "bg-paper text-ink/70"
                         }`}
-                        style={
-                          activity?.id === m.id
-                            ? { background: "linear-gradient(135deg, #FF9B85, #C7B3F5)" }
-                            : undefined
-                        }
                       >
-                        <span>{m.emoji}</span>
+                        <Icon name={m.icon} size={13} strokeWidth={2} />
                         {m.label}
                       </motion.button>
                     ))}
                 </div>
 
-                <p className="text-xs font-bold text-muted uppercase tracking-wide mb-2">Optional</p>
+                <p className="text-xs font-extrabold text-ink-faint uppercase tracking-wider mb-2">Optional</p>
                 <div className="flex flex-col gap-2.5 mb-6">
                   <OptionRow
-                    icon="🕐"
+                    icon="clock"
                     label="Time"
                     value={time ?? "Anytime"}
                     open={expanded === "time"}
@@ -135,8 +128,8 @@ export default function CreateHuddleSheet({ open, onClose, prefill }: CreateHudd
                           whileTap={{ scale: 0.92 }}
                           key={t}
                           onClick={() => setTime(t)}
-                          className={`px-3.5 py-2 rounded-full text-xs font-bold ${
-                            time === t ? "bg-ink text-white" : "bg-white/70 text-ink/70"
+                          className={`px-3.5 py-2 rounded-full text-xs font-extrabold border-2 border-ink ${
+                            time === t ? "bg-ink text-paper" : "bg-paper text-ink/70"
                           }`}
                         >
                           {t}
@@ -146,7 +139,7 @@ export default function CreateHuddleSheet({ open, onClose, prefill }: CreateHudd
                   </OptionRow>
 
                   <OptionRow
-                    icon="📍"
+                    icon="pin"
                     label="Location"
                     value={location || "Nearby"}
                     open={expanded === "location"}
@@ -156,12 +149,12 @@ export default function CreateHuddleSheet({ open, onClose, prefill }: CreateHudd
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
                       placeholder="e.g. Downtown, my place…"
-                      className="mt-3 w-full rounded-xl px-3.5 py-2.5 bg-white/80 border border-white/70 text-ink text-sm font-semibold placeholder:text-muted/70 placeholder:font-medium focus:outline-none"
+                      className="mt-3 w-full rounded-xl px-3.5 py-2.5 bg-paper border-2 border-ink/70 text-ink text-sm font-bold placeholder:text-ink-faint placeholder:font-semibold focus:outline-none"
                     />
                   </OptionRow>
 
                   <OptionRow
-                    icon="👥"
+                    icon="people"
                     label="Friends"
                     value={selectedFriends.length ? `${selectedFriends.length} invited` : "Everyone sees it"}
                     open={expanded === "friends"}
@@ -176,18 +169,18 @@ export default function CreateHuddleSheet({ open, onClose, prefill }: CreateHudd
                           className="flex flex-col items-center gap-1"
                         >
                           <div className="relative">
-                            <Avatar emoji={f.emoji} gradient={f.color} size={44} />
+                            <Avatar name={f.name} color={f.color} size={44} />
                             {selectedFriends.includes(f.id) && (
                               <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
-                                className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-mint-dark ring-2 ring-white flex items-center justify-center text-white text-[10px] font-bold"
+                                className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-reef border-2 border-paper flex items-center justify-center text-paper"
                               >
-                                ✓
+                                <Icon name="check" size={11} strokeWidth={2.6} />
                               </motion.div>
                             )}
                           </div>
-                          <span className="text-[10px] font-semibold text-ink/70">{f.name}</span>
+                          <span className="text-[10px] font-bold text-ink/70">{f.name}</span>
                         </motion.button>
                       ))}
                     </div>
@@ -195,12 +188,11 @@ export default function CreateHuddleSheet({ open, onClose, prefill }: CreateHudd
                 </div>
 
                 <motion.button
-                  whileTap={{ scale: 0.96 }}
+                  whileTap={{ scale: 0.97, y: 2, boxShadow: "1.5px 1.5px 0 rgba(34,29,22,0.92)" }}
                   onClick={handleStart}
-                  className="w-full py-4 rounded-full text-white font-display font-bold text-lg shadow-floaty"
-                  style={{ background: "linear-gradient(135deg, #FF9B85 0%, #C7B3F5 55%, #7EC2E8 100%)" }}
+                  className="sticker w-full py-4 rounded-xl2 bg-rust text-paper font-display text-lg"
                 >
-                  Start Huddle 🚀
+                  Start Huddle
                 </motion.button>
               </div>
             ) : (
@@ -221,7 +213,7 @@ function OptionRow({
   onToggle,
   children,
 }: {
-  icon: string;
+  icon: Parameters<typeof Icon>[0]["name"];
   label: string;
   value: string;
   open: boolean;
@@ -229,19 +221,16 @@ function OptionRow({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white/60 rounded-2xl px-4 py-3 border border-white/60">
+    <div className="paper-card rounded-xl2 px-4 py-3">
       <button onClick={onToggle} className="w-full flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <span className="text-lg">{icon}</span>
-          <span className="font-bold text-ink text-sm">{label}</span>
+        <div className="flex items-center gap-2.5 text-ink-soft">
+          <Icon name={icon} size={18} />
+          <span className="font-extrabold text-ink text-sm">{label}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-muted font-semibold">{value}</span>
-          <motion.span
-            animate={{ rotate: open ? 180 : 0 }}
-            className="text-muted text-xs"
-          >
-            ▾
+          <span className="text-xs text-ink-faint font-bold">{value}</span>
+          <motion.span animate={{ rotate: open ? 180 : 0 }} className="text-ink-faint">
+            <Icon name="chevron" size={13} />
           </motion.span>
         </div>
       </button>
@@ -274,18 +263,17 @@ function SuccessState({ text, onClose }: { text: string; onClose: () => void }) 
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 260, damping: 16 }}
-          className="w-24 h-24 rounded-full flex items-center justify-center text-5xl shadow-floaty"
-          style={{ background: "linear-gradient(135deg, #8FE8C4, #A8D8F0)" }}
+          className="sticker w-24 h-24 rounded-full flex items-center justify-center bg-reef text-paper"
         >
-          🎉
+          <Icon name="check" size={40} strokeWidth={2.4} />
         </motion.div>
-        <Confetti count={26} />
+        <Confetti count={24} />
       </div>
       <motion.h2
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15 }}
-        className="font-display font-bold text-2xl text-ink mt-5"
+        className="font-display text-2xl text-ink mt-5"
       >
         Huddle started!
       </motion.h2>
@@ -293,9 +281,9 @@ function SuccessState({ text, onClose }: { text: string; onClose: () => void }) 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.22 }}
-        className="text-muted font-medium mt-1.5 max-w-[240px]"
+        className="text-ink-soft font-semibold mt-1.5 max-w-[240px]"
       >
-        Friends nearby just got a ping about <span className="text-ink font-bold">{text}</span>
+        Friends nearby just got a ping about <span className="text-ink font-extrabold">{text}</span>
       </motion.p>
     </div>
   );
