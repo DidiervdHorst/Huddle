@@ -12,12 +12,12 @@ export default function WaveArt({ className = "" }: WaveArtProps) {
     >
       <defs>
         <linearGradient id="waveBack" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#5FAE9C" />
-          <stop offset="100%" stopColor="#1D5346" />
+          <stop offset="0%" stopColor="#A6E6FF" />
+          <stop offset="100%" stopColor="#2FA3D6" />
         </linearGradient>
         <linearGradient id="waveFront" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#7FC3B2" />
-          <stop offset="100%" stopColor="#2F7A6B" />
+          <stop offset="0%" stopColor="#3DDC97" />
+          <stop offset="100%" stopColor="#20B47E" />
         </linearGradient>
       </defs>
 
@@ -37,23 +37,23 @@ export default function WaveArt({ className = "" }: WaveArtProps) {
       {/* foam along the crest */}
       <path
         d="M118,52 C138,64 152,88 140,112 C132,128 112,140 96,136 C118,132 132,116 128,98 C124,82 110,70 96,66 C104,58 112,54 118,52 Z"
-        fill="#F8F0E0"
+        fill="#FBF8F3"
         opacity="0.95"
       />
       <path
         d="M170,132 C200,124 236,128 268,138 C230,132 196,140 172,150 C168,144 168,138 170,132 Z"
-        fill="#F8F0E0"
+        fill="#FBF8F3"
         opacity="0.85"
       />
       <path
         d="M60,128 C80,122 100,126 112,138 C96,136 78,138 64,146 C60,140 58,134 60,128 Z"
-        fill="#F8F0E0"
+        fill="#FBF8F3"
         opacity="0.7"
       />
 
       {/* tiny surfer mark */}
-      <circle cx="150" cy="118" r="2.6" fill="#25201A" />
-      <path d="M147,120 L154,116" stroke="#25201A" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="150" cy="118" r="2.6" fill="#2B2733" />
+      <path d="M147,120 L154,116" stroke="#2B2733" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }

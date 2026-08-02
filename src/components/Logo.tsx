@@ -6,23 +6,23 @@ interface LogoProps {
 }
 
 const sizeMap = {
-  sm: 22,
-  md: 30,
-  lg: 52,
+  sm: { font: 16, padX: 14, padY: 7, radius: 16 },
+  md: { font: 20, padX: 18, padY: 9, radius: 20 },
+  lg: { font: 34, padX: 26, padY: 14, radius: 28 },
 };
 
 export default function Logo({ size = "md", className = "" }: LogoProps) {
-  const fontSize = sizeMap[size];
+  const s = sizeMap[size];
   return (
-    <motion.div whileTap={{ scale: 0.95 }} className={`relative inline-flex ${className}`}>
+    <motion.div
+      whileTap={{ scale: 0.95 }}
+      className={`inline-flex items-center brand-gradient shadow-glow ${className}`}
+      style={{ borderRadius: s.radius, paddingLeft: s.padX, paddingRight: s.padX, paddingTop: s.padY, paddingBottom: s.padY }}
+    >
       <span
-        aria-hidden
-        className="absolute font-display text-coral-dark leading-none select-none"
-        style={{ fontSize, left: 2, top: 2.5 }}
+        className="font-display text-white leading-none select-none tracking-wide logo-shadow"
+        style={{ fontSize: s.font }}
       >
-        huddle
-      </span>
-      <span className="relative font-display text-gold leading-none select-none" style={{ fontSize }}>
         huddle
       </span>
     </motion.div>

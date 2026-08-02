@@ -1,40 +1,72 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import BottomNav, { type Screen } from "./components/BottomNav";
-import CreateHuddleSheet from "./components/CreateHuddleSheet";
-import FreeToast from "./components/FreeToast";
+import CreateHuddleSheet, { type CreatePrefill } from "./components/CreateHuddleSheet";
+import HuddleDetailSheet from "./components/HuddleDetailSheet";
 import GradientBackground from "./components/GradientBackground";
 import PhoneFrame from "./components/PhoneFrame";
 import Logo from "./components/Logo";
 import HomeScreen from "./screens/HomeScreen";
-import ActivityScreen from "./screens/ActivityScreen";
+import CalendarScreen from "./screens/CalendarScreen";
+import HuddlesScreen from "./screens/HuddlesScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import { groups as initialGroups, type Group, type MoodOption } from "./data/mockData";
+import type { IconName } from "./components/Icon";
+import { groups as initialGroups, huddles as initialHuddles, type Group, type Huddle, type ResponseStatus } from "./data/mockData";
 
 function App() {
   const [screen, setScreen] = useState<Screen>("home");
   const [sheetOpen, setSheetOpen] = useState(false);
-  const [prefillMood, setPrefillMood] = useState<MoodOption | null>(null);
-  const [freeToastOpen, setFreeToastOpen] = useState(false);
+  const [prefill, setPrefill] = useState<CreatePrefill>(null);
   const [groups, setGroups] = useState<Group[]>(initialGroups);
+  const [huddles, setHuddles] = useState<Huddle[]>(initialHuddles);
+  const [detailId, setDetailId] = useState<string | null>(null);
 
-  const handleMoodTap = (mood: MoodOption) => {
-    if (mood.id === "free") {
-      setFreeToastOpen(true);
-      return;
-    }
-    setPrefillMood(mood);
-    setSheetOpen(true);
-  };
-
-  const handleCreateTap = () => {
-    setPrefillMood(null);
+  const openCreate = (p: CreatePrefill) => {
+    setPrefill(p);
     setSheetOpen(true);
   };
 
   const handleCreateGroup = (name: string, memberIds: string[]) => {
     setGroups((prev) => [...prev, { id: `g${prev.length + 1}-${Date.now()}`, name, memberIds }]);
   };
+
+  const handleCreateHuddle = (data: Omit<Huddle, "id" | "responses">) => {
+    setHuddles((prev) => [{ ...data, id: `h-${Date.now()}`, responses: {} }, ...prev]);
+  };
+
+  const handleRespond = (id: string, status: ResponseStatus) => {
+    setHuddles((prev) => prev.map((h) => (h.id === id ? { ...h, myResponse: status } : h)));
+  };
+
+  const handleVote = (id: string, optionId: string) => {
+    setHuddles((prev) =>
+      prev.map((h) => {
+        if (h.id !== id || !h.datePoll) return h;
+        return {
+          ...h,
+          datePoll: h.datePoll.map((opt) => {
+            const has = opt.votes.includes("me");
+            if (opt.id === optionId) {
+              return { ...opt, votes: has ? opt.votes.filter((v) => v !== "me") : [...opt.votes, "me"] };
+            }
+            return { ...opt, votes: opt.votes.filter((v) => v !== "me") };
+          }),
+        };
+      }),
+    );
+  };
+
+  const handleComment = (id: string, text: string) => {
+    setHuddles((prev) =>
+      prev.map((h) =>
+        h.id === id
+          ? { ...h, comments: [...(h.comments ?? []), { id: `c-${Date.now()}`, authorId: "me", text, time: "Just now" }] }
+          : h,
+      ),
+    );
+  };
+
+  const detailHuddle = huddles.find((h) => h.id === detailId) ?? null;
 
   return (
     <PhoneFrame>
@@ -57,22 +89,46 @@ function App() {
             transition={{ duration: 0.2 }}
             className="absolute inset-0"
           >
-            {screen === "home" && <HomeScreen onMoodTap={handleMoodTap} />}
-            {screen === "activity" && <ActivityScreen />}
+            {screen === "home" && (
+              <HomeScreen
+                huddles={huddles}
+                onStartActivity={(activityId) => openCreate({ kind: "activity", activityId })}
+                onStartOpen={() => openCreate({ kind: "open" })}
+                onOpenDetail={setDetailId}
+                onQuickJoin={(id) => handleRespond(id, "in")}
+                onViewCalendar={() => setScreen("calendar")}
+              />
+            )}
+            {screen === "calendar" && (
+              <CalendarScreen
+                huddles={huddles}
+                onOpenDetail={setDetailId}
+                onStartCustom={(title, icon) => openCreate({ kind: "activity", customTitle: title, customIcon: icon as IconName })}
+              />
+            )}
+            {screen === "huddles" && <HuddlesScreen huddles={huddles} onOpenDetail={setDetailId} onRespond={handleRespond} />}
             {screen === "profile" && <ProfileScreen groups={groups} onCreateGroup={handleCreateGroup} />}
           </motion.div>
         </AnimatePresence>
       </div>
 
-      <BottomNav active={screen} onNavigate={setScreen} onCreate={handleCreateTap} />
+      <BottomNav active={screen} onNavigate={setScreen} onCreate={() => openCreate(null)} />
 
       <CreateHuddleSheet
         open={sheetOpen}
         onClose={() => setSheetOpen(false)}
-        prefill={prefillMood}
+        prefill={prefill}
         groups={groups}
+        onCreate={handleCreateHuddle}
       />
-      <FreeToast open={freeToastOpen} onClose={() => setFreeToastOpen(false)} />
+
+      <HuddleDetailSheet
+        huddle={detailHuddle}
+        onClose={() => setDetailId(null)}
+        onRespond={handleRespond}
+        onVote={handleVote}
+        onComment={handleComment}
+      />
     </PhoneFrame>
   );
 }

@@ -24,13 +24,13 @@ export default function ProfileScreen({ groups, onCreateGroup }: ProfileScreenPr
         >
           <Avatar name={currentUser.name} color={currentUser.avatarColor} size={92} ring />
         </motion.div>
-        <h1 className="font-display text-3xl text-navy-dark mt-3">{currentUser.name}</h1>
+        <h1 className="font-display text-3xl text-ink mt-3">{currentUser.name}</h1>
         <p className="text-ink-soft font-semibold text-sm mt-0.5">Always down for something spontaneous</p>
       </div>
 
       {/* Interests */}
       <div className="px-5 mt-7">
-        <p className="text-xs font-extrabold text-ink-faint uppercase tracking-wider mb-2.5">Interests</p>
+        <p className="text-xs font-bold text-ink-faint uppercase tracking-wider mb-2.5">Interests</p>
         <div className="flex flex-wrap gap-2">
           {currentUser.interests.map((interest, i) => (
             <motion.span
@@ -38,7 +38,7 @@ export default function ProfileScreen({ groups, onCreateGroup }: ProfileScreenPr
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.04 }}
-              className="px-3.5 py-2 rounded-xl2 paper-card text-xs font-bold text-ink/80 shadow-card"
+              className="px-3.5 py-2 rounded-xl2 card-surface text-xs font-bold text-ink/80 shadow-card"
             >
               {interest}
             </motion.span>
@@ -48,7 +48,7 @@ export default function ProfileScreen({ groups, onCreateGroup }: ProfileScreenPr
 
       {/* Favorite activities */}
       <div className="px-5 mt-7">
-        <p className="text-xs font-extrabold text-ink-faint uppercase tracking-wider mb-2.5">Favorite activities</p>
+        <p className="text-xs font-bold text-ink-faint uppercase tracking-wider mb-2.5">Favorite activities</p>
         <div className="grid grid-cols-4 gap-2.5">
           {currentUser.favoriteActivities.map((act, i) => (
             <motion.div
@@ -56,7 +56,7 @@ export default function ProfileScreen({ groups, onCreateGroup }: ProfileScreenPr
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="paper-card rounded-xl2 py-3.5 flex items-center justify-center shadow-card text-ink-soft"
+              className="card-surface rounded-xl2 py-3.5 flex items-center justify-center shadow-card text-ink-soft"
               title={act.label}
             >
               <Icon name={act.icon} size={22} />
@@ -68,11 +68,11 @@ export default function ProfileScreen({ groups, onCreateGroup }: ProfileScreenPr
       {/* Groups */}
       <div className="px-5 mt-7">
         <div className="flex items-center justify-between mb-2.5">
-          <p className="text-xs font-extrabold text-ink-faint uppercase tracking-wider">Groups</p>
+          <p className="text-xs font-bold text-ink-faint uppercase tracking-wider">Friend groups</p>
           <motion.button
             whileTap={{ scale: 0.94 }}
             onClick={() => setSheetOpen(true)}
-            className="flex items-center gap-1 text-xs font-extrabold text-teal-dark"
+            className="flex items-center gap-1 text-xs font-bold text-lavender-dark"
           >
             <Icon name="plus" size={13} strokeWidth={2.6} />
             New group
@@ -85,7 +85,7 @@ export default function ProfileScreen({ groups, onCreateGroup }: ProfileScreenPr
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.04 }}
-              className="paper-card rounded-xl2 px-3.5 py-3 flex items-center gap-3 shadow-card"
+              className="card-surface rounded-xl2 px-3.5 py-3 flex items-center gap-3 shadow-card"
             >
               <div className="flex -space-x-2.5 shrink-0">
                 {g.memberIds.slice(0, 3).map((id) => {
@@ -95,7 +95,7 @@ export default function ProfileScreen({ groups, onCreateGroup }: ProfileScreenPr
                 })}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-extrabold text-sm text-ink">{g.name}</p>
+                <p className="font-bold text-sm text-ink">{g.name}</p>
                 <p className="text-[11px] text-ink-faint font-bold">{g.memberIds.length} friends</p>
               </div>
             </motion.div>
@@ -106,8 +106,8 @@ export default function ProfileScreen({ groups, onCreateGroup }: ProfileScreenPr
       {/* Friends */}
       <div className="px-5 mt-7">
         <div className="flex items-center justify-between mb-2.5">
-          <p className="text-xs font-extrabold text-ink-faint uppercase tracking-wider">Friends</p>
-          <span className="text-xs font-extrabold text-teal-dark">{friends.length}</span>
+          <p className="text-xs font-bold text-ink-faint uppercase tracking-wider">Friends</p>
+          <span className="text-xs font-bold text-lavender-dark">{friends.length}</span>
         </div>
         <div className="flex flex-col gap-2">
           {friends.map((f, i) => (
@@ -116,10 +116,10 @@ export default function ProfileScreen({ groups, onCreateGroup }: ProfileScreenPr
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.04 }}
-              className="paper-card rounded-xl2 px-3.5 py-2.5 flex items-center gap-3 shadow-card"
+              className="card-surface rounded-xl2 px-3.5 py-2.5 flex items-center gap-3 shadow-card"
             >
               <Avatar name={f.name} color={f.color} size={40} />
-              <span className="font-extrabold text-sm text-ink flex-1">{f.name}</span>
+              <span className="font-bold text-sm text-ink flex-1">{f.name}</span>
             </motion.div>
           ))}
         </div>

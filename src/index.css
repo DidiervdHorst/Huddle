@@ -18,9 +18,9 @@ body {
 }
 
 body {
-  font-family: "Karla", system-ui, sans-serif;
-  color: #25201a;
-  background: #f1e6d2;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  color: #2b2733;
+  background: #fbf8f3;
 }
 
 #root {
@@ -35,40 +35,55 @@ body {
   scrollbar-width: none;
 }
 
-/* Warm cream poster background */
-.huddle-paper-bg {
-  background-color: #f1e6d2;
+/* Warm, soft base surface */
+.huddle-cream-bg {
+  background-color: #fbf8f3;
 }
 
-.huddle-grain {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
-  opacity: 0.035;
+/* Glassmorphism surfaces */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
-/* Flat "pop" surface: solid color, thin ink rule, chunky flat bottom shadow */
-.pop {
-  border: 2px solid rgba(37, 29, 20, 0.9);
-  box-shadow: 0 4px 0 rgba(37, 29, 20, 0.85);
+.glass-panel {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.8);
 }
 
-.pop-sm {
-  border: 1.5px solid rgba(37, 29, 20, 0.85);
-  box-shadow: 0 3px 0 rgba(37, 29, 20, 0.85);
+.glass-dark {
+  background: rgba(43, 39, 51, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.paper-card {
-  background: #f8f0e0;
-  border: 1.5px solid rgba(37, 29, 20, 0.14);
+.card-surface {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.9);
 }
 
-.paper-panel {
-  background: #f6ecd8;
-  border-top: 2px solid rgba(37, 29, 20, 0.9);
+/* Animated multi-colour brand gradient, used for logo badge + hero surfaces */
+.brand-gradient {
+  background-image: linear-gradient(120deg, #ff7e5f 0%, #ff6fa0 32%, #9b8cff 66%, #54c7f2 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+.brand-gradient-text {
+  background-image: linear-gradient(120deg, #ff7e5f 0%, #ff6fa0 40%, #9b8cff 75%, #54c7f2 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .logo-shadow {
-  text-shadow: 3px 3px 0 rgba(178, 79, 48, 0.9);
+  text-shadow: 0 2px 10px rgba(122, 104, 232, 0.35);
 }
 
 .safe-top {
